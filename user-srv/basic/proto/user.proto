@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "/";
+
+message RegisterReq {
+  string name = 1;
+}
+
+message RegisterResp {
+  int64 Id = 1;
+}
+
+message OrderItemaddReq {
+   int64     UserId     =1;
+   string    OrderSn    =2;
+   int64     OrderNum   =3;
+   float     OrderPrice =4;
+}
+
+message OrderItemaddResp {
+  int64 Id = 1;
+}
+
+message ShopaddReq {
+  string   Title  =1;
+  int64   Num    =2;
+  float   Price  =3;
+  int64   Count  =4;
+  int64   Status =5;
+}
+
+message ShopaddResp {
+  int64 Id = 1;
+}
+message RecordaddReq {
+  string   ProductName  =1;
+  int64   UserId =2;
+  string   OrderSn =3;
+  int64   OrderNum =4;
+}
+
+message RecordaddResp {
+  int64 Id = 1;
+}
+message OrderItemUpdateReq {
+  int64     Id     =1;
+  int64     Status =2;
+}
+
+message OrderItemUpdateResp {
+  int64 Id = 1;
+}
+message OrderItemLikeReq {
+  string    OrderSn    =1;
+}
+
+message OrderItemLikeResp {
+  int64     UserId     =1;
+  string    OrderSn    =2;
+  int64     OrderNum   =3;
+  float     OrderPrice =4;
+  int64    Status     =5;
+}
+
+message ShopListReq {
+  int64 page=1;
+  int64 size=2;
+}
+
+message ShopList {
+  string   Title    =1;
+  int64  Num      =2;
+  float   Price    =3;
+  int64   Count    =4;
+  int64   Status      =5;
+}
+
+message ShopListResp {
+  repeated ShopList list =1;
+}
+message OrderItemShowReq {
+  int64 Id = 1;
+}
+
+message OrderItemShowResp {
+  int64     UserId     =1;
+  string    OrderSn    =2;
+  int64     OrderNum   =3;
+  float     OrderPrice =4;
+}
+
+message OrderItemListReq {
+  int64 page=1;
+  int64 size=2;
+}
+
+message OrderItemList {
+  int64     UserId     =1;
+  string    OrderSn    =2;
+  int64     OrderNum   =3;
+  float     OrderPrice =4;
+  int64     Status     =5;
+}
+
+message OrderItemListResp {
+  repeated OrderItemList list =1;
+}
+
+message OrderItemdelReq {
+  int64 ShopId =1;
+  int64 UserId =2;
+
+}
+
+message OrderItemdelResp {
+ string OrderSn=1;
+}
+
+service User {
+  rpc Register(RegisterReq) returns (RegisterResp);
+  rpc OrderItemadd(OrderItemaddReq) returns (OrderItemaddResp);
+  rpc OrderItemUpdate(OrderItemUpdateReq) returns (OrderItemUpdateResp);
+  rpc OrderItemLike(OrderItemLikeReq) returns (OrderItemLikeResp);
+  rpc Shopadd(ShopaddReq) returns (ShopaddResp);
+  rpc Recordadd(RecordaddReq) returns (RecordaddResp);
+  rpc ShopList(ShopListReq) returns (ShopListResp);
+  rpc OrderItemShow(OrderItemShowReq) returns (OrderItemShowResp);
+  rpc OrderItemList(OrderItemListReq) returns (OrderItemListResp);
+  rpc OrderItemdel(OrderItemdelReq) returns (OrderItemdelResp);
+}
